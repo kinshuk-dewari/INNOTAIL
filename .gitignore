@@ -1,0 +1,27 @@
+# Node modules
+/node_modules/
+
+# Build output
+/dist/
+/build/
+
+# TypeScript build info
+*.tsbuildinfo
+
+# Prisma artifacts
+/prisma/dev.db
+/prisma/dev.db-journal
+/prisma/migrations/dev/
+.env
+.env.*
+
+# Log files
+*.log
+
+# Ignore Mac system files
+.DS_Store
+
+# Ignore system or editor files
+.vscode/
+.idea/
+

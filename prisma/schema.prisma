@@ -1,0 +1,105 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Device Table: To track devices (camera/sensor) and type
+model Device {
+  deviceId     String   @id
+  deviceType   String   // "Camera" or "Sensor"
+  shelfId      String?
+  isActive     Boolean  @default(true)
+
+  shelf        Shelf?   @relation(fields: [shelfId], references: [shelfId])
+  cameraImages CameraImageData[]
+  cameraVideos CameraVideoData[]
+  sensorData   WeightSensorData[]
+  heatmaps     HeatmapData[]
+}
+
+
+// Shelf Table: Maps products to shelves
+model Shelf {
+  shelfId        String   @id
+  blockId        String
+  productId      String
+  currentStock   Int
+
+  productDetails ProductShelfDetails[]
+  cameraImages   CameraImageData[]
+  cameraVideos   CameraVideoData[]
+  sensorData     WeightSensorData[]
+  device         Device[]
+}
+
+// Product Table: Static product information
+model Product {
+  productId     String   @id
+  name          String
+  category      String
+  unitWeight    Float
+  manufacturer  String?
+}
+
+// ProductShelfDetails Table
+model ProductShelfDetails {
+  id              Int      @id @default(autoincrement())
+  shelfId         String
+  productCategory String
+  productCount    Int
+  inventoryCount  Int
+
+  shelf           Shelf    @relation(fields: [shelfId], references: [shelfId])
+}
+
+// CameraImageData Table
+model CameraImageData {
+  id          Int      @id @default(autoincrement())
+  cameraId    String
+  timestamp   DateTime
+  imageUrl    String
+  shelfId     String
+
+  device      Device   @relation(fields: [cameraId], references: [deviceId])
+  shelf       Shelf    @relation(fields: [shelfId], references: [shelfId])
+}
+
+// CameraVideoData Table
+model CameraVideoData {
+  id          Int      @id @default(autoincrement())
+  cameraId    String
+  timestamp   DateTime
+  videoUrl    String
+  shelfId     String
+
+  device      Device   @relation(fields: [cameraId], references: [deviceId])
+  shelf       Shelf    @relation(fields: [shelfId], references: [shelfId])
+}
+
+// WeightSensorData Table
+model WeightSensorData {
+  id            Int      @id @default(autoincrement())
+  sensorId      String
+  timestamp     DateTime
+  shelfId       String
+  initialWeight Float
+  finalWeight   Float
+
+  device        Device   @relation(fields: [sensorId], references: [deviceId])
+  shelf         Shelf    @relation(fields: [shelfId], references: [shelfId])
+}
+
+// HeatmapData Table
+model HeatmapData {
+  id          Int      @id @default(autoincrement())
+  timestamp   DateTime
+  cameraId    String
+  areaCode    String
+  intensity   Int
+
+  device      Device   @relation(fields: [cameraId], references: [deviceId])
+}
