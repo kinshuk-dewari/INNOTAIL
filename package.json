@@ -4,6 +4,8 @@
   "description": "IOT product for supermarket/hypermarket owners giving them insights and product details for boosting their sales",
   "main": "index.js",
   "scripts": {
+    "dev": "ts-node src/index.ts",
+    "start": "node dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -23,11 +25,12 @@
     "@types/node": "^24.1.0",
     "nodemon": "^3.1.10",
     "ts-node": "^10.9.2",
-    "typescript": "^5.8.3"
+    "typescript": "^5.9.2"
   },
   "dependencies": {
     "@prisma/client": "^6.13.0",
     "csv-parser": "^3.2.0",
+    "express": "^5.1.0",
     "fs": "^0.0.1-security",
     "prisma": "^6.13.0"
   }
