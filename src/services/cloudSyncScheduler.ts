@@ -17,7 +17,7 @@ async function fetchAndUpload() {
     };
 
     const filename = 'live-data.json';
-    const url = await uploadJSONToS3(data, bucketName, filename, true);
+    const url = await uploadJSONToS3(data, bucketName, filename);
     console.log('✅ Data updated in S3:', url);
   } catch (error) {
     console.error('❌ Failed to upload data:', error);

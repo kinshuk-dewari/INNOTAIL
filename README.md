@@ -64,3 +64,9 @@ npx ts-node src/index.ts
 ```
 demo api: `http://localhost:3000/api/PATH/INNER_ROUTE` <br>
 example diaplay all table data: `http://localhost:3000/api/display/display-all`
+
+
+### 7. AWS connections 
+```bash
+npm install @aws-sdk/client-s3 uuid
+```

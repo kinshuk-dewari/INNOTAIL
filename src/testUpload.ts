@@ -1,4 +1,4 @@
-import { uploadJSONToS3 } from './awsUploader';
+import { uploadJSONToS3 } from './services/awsUploader';
 
 const testData = {
   message: "Hello from Innotail!",
