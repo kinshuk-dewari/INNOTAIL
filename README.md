@@ -35,6 +35,9 @@ mkdir .env
 Then add your PostgreSQL connection string:
 ```env
 DATABASE_URL="your_postgress_instance_connection_string"
+AWS_ACCESS_KEY_ID=your_access_key
+AWS_SECRET_ACCESS_KEY=your_secret_key
+AWS_REGION=ap-south-1
 ```
 generate prisma client
 ```
